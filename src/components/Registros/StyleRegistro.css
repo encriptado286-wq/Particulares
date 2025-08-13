@@ -1,0 +1,39 @@
+.viewRegistros {
+  background-image: url(/img/fondoVerde.png);
+  background-position: center;
+  background-size: 100% 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Centra el contenido en el eje Y */
+  justify-content: center; /* Centra el contenido en el eje X */
+  overflow-y: auto; /* Habilita el scroll vertical si es necesario */
+}
+
+.accordion {
+  min-width: 240px;
+  max-height: 65vh;  /* Limita la altura máxima del acordeón */
+  overflow-y: auto; /* Permite el scroll vertical si el contenido excede */
+  margin-bottom: 250px;
+}
+
+.accordion-header {
+  background-color: #d8bfbf;
+  border: 1px solid #ddd;
+  padding: 10px; /* Reduce el padding para disminuir la altura */
+}
+
+/* Ajuste importante para mostrar todo el contenido sin scroll */
+.accordion-body {
+  max-height: none; /* Permite que el contenido se expanda completamente */
+  overflow: visible; /* Evita que el contenido se recorte */
+  padding: 10px;      /* Añade un poco de padding dentro */
+}
+
+.pago-true {
+  color: green;
+}
+
+.pago-false {
+  color: red;
+}

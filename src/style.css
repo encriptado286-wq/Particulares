@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&display=swap');
+
+:root {
+  --main: #36285ed7;
+  --rosa: rgba(214, 119, 119, 0.74);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;  /* Evita barras de desplazamiento si no son necesarias */
+}
+
+
+h1{
+  color: white;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    font-family: 'Playwrite AU SA', sans-serif;
+}
+  
+h2{
+  color: var(--main);
+  font-size: 1rem;
+}

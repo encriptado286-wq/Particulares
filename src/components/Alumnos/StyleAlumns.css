@@ -1,0 +1,84 @@
+.alumnos{
+    background-image: url(/img/fondoVerde.png);
+    background-position: center;
+    background-size: 100% 100%;
+    min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Si quieres centrar todo dentro de la sección */
+}
+
+/* Formulario */
+.form-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+   
+}
+.form-label {
+    color: white;
+}
+
+/* Contenedor específico para el botón */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    /* Empuja el botón al lado derecho */
+    width: 100%;
+    /* Asegura que el contenedor ocupe todo el ancho */
+}
+
+.btnAdd {
+    background-color: #da6ebf !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+}
+
+.btnAdd:hover {
+    background-color: white !important;
+    color: #da6ebf !important;
+}
+
+/* Contenedor de la tabla de alumnos */
+.tabla-alumnos {
+    box-shadow: 5px 14px 28px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;  /* Habilita el scroll vertical */
+    margin-bottom: 5px; /* Ajusta el espacio inferior para evitar que el nav oculte el contenido */
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-radius: 15px; /* Bordes redondeados para la tabla */
+}
+
+/* Estilo para la tabla dentro del contenedor */
+.table {
+    width: 100%;
+    table-layout: fixed;  /* Evita que el contenido sobresalga */
+ 
+}
+
+/* Ajustar el tamaño de columnas para evitar desbordamientos */
+.table th, .table td {
+    padding: 12px;
+    border: 1px solid #ddd;  /* Bordes de las celdas */
+    text-align: center;
+    word-wrap: break-word;  /* Rompe el contenido largo para evitar desbordamientos */
+    overflow: hidden;
+}
+
+.pAlumnos{
+    color: black;
+    font-weight: 900;
+}
+.btnViewTable {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.btnViewTable:hover {
+    background-color: white !important;
+    color: #4CAF50 !important;
+}
