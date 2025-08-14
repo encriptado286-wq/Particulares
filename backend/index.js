@@ -13,3 +13,7 @@ app.use('/api/registros', registrosRoutes);
 app.listen(5000, () => {
   console.log('Servidor en puerto 5000');
 });
+
+app.get('/', (req, res) => {
+  res.send('Backend funcionando correctamente 🚀');
+});
