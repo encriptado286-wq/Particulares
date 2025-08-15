@@ -23,7 +23,7 @@ const Asistencias = () => {
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/alumnos`);
+        const res = await fetch(`${API_URL}/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
         const data = await res.json();
         setAlumnos(data);
@@ -44,7 +44,7 @@ const Asistencias = () => {
     const fechaFormateada = convertirFecha(new Date(fecha));
 
     try {
-      const res = await fetch(`${API_URL}/api/registros`, {
+      const res = await fetch(`${API_URL}/registros`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
