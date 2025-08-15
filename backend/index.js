@@ -11,11 +11,11 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas API
-app.use('/api/alumnos', alumnosRoutes);
-app.use('/api/registros', registrosRoutes);
+app.use('/alumnos', alumnosRoutes);
+app.use('/registros', registrosRoutes);
 
 // Ruta para que el frontend obtenga la URL del backend
-app.get('/api/config', (req, res) => {
+app.get('/config', (req, res) => {
   res.json({ apiUrl: process.env.API_URL });
 });
 
