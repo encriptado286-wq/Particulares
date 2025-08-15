@@ -14,8 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<div className="container-fluid">
         </div>} />
-        <Route path="/asistencias" element={<Asistencias />} />
-        <Route path="/addAlumnos" element={<AddAlumnos />} />
+        <Route path="/asistencia" element={<Asistencias />} />
+        <Route path="/addAlumno" element={<AddAlumnos />} />
         <Route path="/registros" element={<Registros />} />
       </Routes>
     </Router>

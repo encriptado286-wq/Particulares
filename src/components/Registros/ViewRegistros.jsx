@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import "./StyleRegistro.css";
-
-const API_URL = process.env.REACT_APP_API_URL; // URL de tu backend
+const API_URL = import.meta.env.VITE_API_URL;
 
 const ViewRegistros = () => {
   const [alumnos, setAlumnos] = useState([]);

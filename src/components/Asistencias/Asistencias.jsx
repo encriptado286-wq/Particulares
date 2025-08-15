@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import Calendario from "../Calendario";
 import "./StyleAsist.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Asistencias = () => {
   const [alumnos, setAlumnos] = useState([]);
@@ -9,8 +10,6 @@ const Asistencias = () => {
   const [fecha, setFecha] = useState("");
   const [pago, setPago] = useState(false);
   const [mensajeExito, setMensajeExito] = useState("");
-
-  const API_URL = process.env.REACT_APP_API_URL; // URL de tu backend
 
   const convertirFecha = (fecha) => {
     const dia = fecha.getDate().toString().padStart(2, "0");

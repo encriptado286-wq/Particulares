@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./StyleAlumns.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AddAlumnos = () => {
   const [nombre, setNombre] = useState("");
   const [grado, setGrado] = useState("");
@@ -8,8 +10,6 @@ const AddAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [mostrarTabla, setMostrarTabla] = useState(false);
 
-  // Tomamos la URL del backend desde Environment Variable
-  const API_URL = process.env.REACT_APP_API_URL;
 
   // Cargar alumnos desde la API backend
   useEffect(() => {
