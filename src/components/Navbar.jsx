@@ -16,11 +16,11 @@ if (isHome) {
     <h1 className='h1Home text-center'>Sistema de Registración en Asistencias y Alumnos</h1>
   
     <nav className="navBar-home">
-      <a href="/asistencia" className="nav-item btnAsist" data-tooltip="Añadir Asistencia">
+      <a href="/asistencias" className="nav-item btnAsist" data-tooltip="Añadir Asistencia">
         <i className="bi bi-journal-check"></i>
       </a>
   
-      <a href="/addAlumno" className="nav-item btnAlumn" data-tooltip="Agregar Alumno">
+      <a href="/addAlumnos" className="nav-item btnAlumn" data-tooltip="Agregar Alumno">
         <i className="bi bi-person-fill-add"></i>
       </a>
   
@@ -51,11 +51,11 @@ if (isHome) {
         <i className="bi bi-house-door"></i>
         <div>Inicio</div>
       </a>
-      <a href="/asistencia" className="nav-link text-light text-center">
+      <a href="/asistencias" className="nav-link text-light text-center">
         <i className="bi bi-journal-check"></i>
         <div>+ Asistencias</div>
       </a>
-      <a href="/addAlumno" className="nav-link text-light text-center">
+      <a href="/addAlumnos" className="nav-link text-light text-center">
         <i className="bi bi-person-fill-add"></i>
         <div>+ Alumno</div>
       </a>

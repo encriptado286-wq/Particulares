@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import Calendario from "../Calendario";
 import "./StyleAsist.css";
 const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL);
 
 const Asistencias = () => {
   const [alumnos, setAlumnos] = useState([]);
