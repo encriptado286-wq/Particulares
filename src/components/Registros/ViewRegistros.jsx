@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import "./StyleRegistro.css";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = process.env.REACT_APP_API_URL; // URL de tu backend
 
 const ViewRegistros = () => {
   const [alumnos, setAlumnos] = useState([]);

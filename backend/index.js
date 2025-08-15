@@ -1,19 +1,24 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import alumnosRoutes from './rutas/alumnos.js';
 import registrosRoutes from './rutas/registros.js';
+
+dotenv.config(); // lee .env
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Rutas API
 app.use('/api/alumnos', alumnosRoutes);
 app.use('/api/registros', registrosRoutes);
 
-app.listen(5000, () => {
-  console.log('Servidor en puerto 5000');
+// Ruta para que el frontend obtenga la URL del backend
+app.get('/api/config', (req, res) => {
+  res.json({ apiUrl: process.env.API_URL });
 });
 
-app.get('/', (req, res) => {
-  res.send('Backend funcionando correctamente 🚀');
+app.listen(5000, () => {
+  console.log('Servidor en puerto 5000');
 });

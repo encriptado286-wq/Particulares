@@ -10,19 +10,20 @@ const Asistencias = () => {
   const [pago, setPago] = useState(false);
   const [mensajeExito, setMensajeExito] = useState("");
 
-  // Función para convertir fecha (movida desde helpers)
+  const API_URL = process.env.REACT_APP_API_URL; // URL de tu backend
+
   const convertirFecha = (fecha) => {
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const dia = fecha.getDate().toString().padStart(2, "0");
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
     const año = fecha.getFullYear();
     return `${dia}/${mes}/${año}`;
   };
 
-  // Cargar alumnos desde la API
+  // Cargar alumnos
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/alumnos");
+        const res = await fetch(`${API_URL}/api/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
         const data = await res.json();
         setAlumnos(data);
@@ -31,7 +32,7 @@ const Asistencias = () => {
       }
     };
     cargarAlumnos();
-  }, []);
+  }, [API_URL]);
 
   // Registrar asistencia
   const handleRegistro = async () => {
@@ -43,14 +44,14 @@ const Asistencias = () => {
     const fechaFormateada = convertirFecha(new Date(fecha));
 
     try {
-      const res = await fetch("http://localhost:5000/api/registros", {
+      const res = await fetch(`${API_URL}/api/registros`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           alumnoId: selectAlumno,
           fecha: fechaFormateada,
-          pago: pago
-        })
+          pago: pago,
+        }),
       });
 
       if (!res.ok) throw new Error("Error al registrar asistencia");
@@ -70,9 +71,12 @@ const Asistencias = () => {
       <h1 className="text-center">Añadir Asistencia</h1>
 
       <Form className="formAsist">
-        {/* Seleccionar alumno */}
         <Form.Group controlId="selectAlumno" className="mb-3 d-flex justify-content-center">
-          <Form.Control as="select" value={selectAlumno} onChange={(e) => setSelectAlumno(e.target.value)}>
+          <Form.Control
+            as="select"
+            value={selectAlumno}
+            onChange={(e) => setSelectAlumno(e.target.value)}
+          >
             <option value="-1">Seleccione Alumn@</option>
             {alumnos.map((alumno) => (
               <option key={alumno.id} value={alumno.id}>
@@ -82,14 +86,12 @@ const Asistencias = () => {
           </Form.Control>
         </Form.Group>
 
-        {/* Seleccionar fecha */}
         <div className="d-flex justify-content-center calendar-container">
           <Form.Group controlId="fecha">
             <Calendario setFecha={setFecha} fechaSeleccionada={fecha} />
           </Form.Group>
         </div>
 
-        {/* Pago */}
         <div className="d-flex justify-content-start">
           <p className="mt-2 pAsist">Seleccione Pago</p>
           <Form.Group controlId="pago">
@@ -102,7 +104,6 @@ const Asistencias = () => {
           </Form.Group>
         </div>
 
-        {/* Botón registrar */}
         <div className="d-flex justify-content-center">
           <Button className="btnRegistro btn" onClick={handleRegistro}>
             Registrar

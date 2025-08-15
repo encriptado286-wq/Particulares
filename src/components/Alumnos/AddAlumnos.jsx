@@ -8,11 +8,14 @@ const AddAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [mostrarTabla, setMostrarTabla] = useState(false);
 
+  // Tomamos la URL del backend desde Environment Variable
+  const API_URL = process.env.REACT_APP_API_URL;
+
   // Cargar alumnos desde la API backend
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/alumnos");
+        const res = await fetch(`${API_URL}/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
         const data = await res.json();
         setAlumnos(data);
@@ -21,7 +24,7 @@ const AddAlumnos = () => {
       }
     };
     cargarAlumnos();
-  }, []);
+  }, [API_URL]);
 
   // Enviar nuevo alumno al backend
   const handleSubmit = async (e) => {
@@ -32,7 +35,7 @@ const AddAlumnos = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/alumnos", {
+      const res = await fetch(`${API_URL}/alumnos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, grado, telefono }),
@@ -41,8 +44,6 @@ const AddAlumnos = () => {
       if (!res.ok) throw new Error("Error al guardar el alumno");
 
       const nuevoAlumno = await res.json();
-
-      // Actualizar la lista local con el alumno nuevo
       setAlumnos((prev) => [...prev, nuevoAlumno]);
 
       setNombre("");
@@ -55,11 +56,11 @@ const AddAlumnos = () => {
 
   return (
     <section className="alumnos">
-      <h1 className="text-center ">Agregar Alumno</h1>
-      <div className="content ">
+      <h1 className="text-center">Agregar Alumno</h1>
+      <div className="content">
         {!mostrarTabla ? (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="">
+            <div>
               <label htmlFor="nombre" className="form-label">
                 Nombre y Apellido
               </label>
@@ -112,7 +113,7 @@ const AddAlumnos = () => {
             </div>
           </form>
         ) : (
-          <div className="">
+          <div>
             <button
               type="button"
               className="btn btnAdd"
