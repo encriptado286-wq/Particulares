@@ -1,33 +1,26 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import alumnosRoutes from './rutas/alumnos.js';
-import registrosRoutes from './rutas/registros.js';
+
+import alumnosRouter from './routes/alumnos.js';
+import registrosRouter from './routes/registros.js';
 
 dotenv.config();
-
 const app = express();
 
-// CORS para el frontend
-app.use(cors({
-  origin: 'https://particulares-front.onrender.com'
-}));
-
+app.use(cors());
 app.use(express.json());
 
-// Rutas API con prefijo /api
-app.use('/api/alumnos', alumnosRoutes);
-app.use('/api/registros', registrosRoutes);
-app.get('/api/config', (req, res) => {
-  res.json({ apiUrl: process.env.API_URL });
-});
+// Rutas de tu API
+app.use('/alumnos', alumnosRouter);
+app.use('/registros', registrosRouter);
 
-// Puerto dinámico para Render
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor en puerto ${PORT}`);
-});
-
+// Ruta raíz de prueba
 app.get('/', (req, res) => {
-  res.send('Servidor backend funcionando 🚀');
+  res.send('✅ Backend funcionando en Render 🚀');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`);
 });
