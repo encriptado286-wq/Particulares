@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import "./StyleRegistro.css";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ViewRegistros = () => {
   const [alumnos, setAlumnos] = useState([]);
 
   const cambiarEstadoPago = async (alumno_id, registroId, pagoActual) => {
-    const nuevoPago = pagoActual === true ? false : true;
+    const nuevoPago = !pagoActual;
 
+    // Actualizar estado localmente
     setAlumnos(prevAlumnos =>
       prevAlumnos.map(alumno => {
         if (alumno.id === alumno_id) {
@@ -25,13 +27,14 @@ const ViewRegistros = () => {
       })
     );
 
+    // Actualizar en el backend
     try {
       await fetch(`${API_URL}/registros/${registroId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           alumno_id,
-          fecha: new Date().toISOString().split("T")[0], // o mantener la original si querés
+          fecha: new Date().toISOString().split("T")[0],
           pago: nuevoPago
         })
       });
@@ -43,6 +46,7 @@ const ViewRegistros = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("API_URL:", API_URL); // Verificar URL
         const [alumnosRes, registrosRes] = await Promise.all([
           fetch(`${API_URL}/alumnos`),
           fetch(`${API_URL}/registros`)
@@ -51,9 +55,10 @@ const ViewRegistros = () => {
         const alumnosData = await alumnosRes.json();
         const registrosData = await registrosRes.json();
 
+        // Corregimos el nombre del campo: alumno_id
         const alumnosConRegistros = alumnosData.map(alumno => {
           const registrosDelAlumno = registrosData.filter(
-            registro => registro.alumnoid === alumno.id
+            registro => registro.alumno_id === alumno.id
           );
           return { ...alumno, registros: registrosDelAlumno };
         });
@@ -106,13 +111,13 @@ const ViewRegistros = () => {
                     .map(registro => (
                       <li key={registro.id}>
                         <div className="d-block">
-                          <p>{registro.fecha.split('T')[0]}</p>
+                          <p>{registro.fecha.split("T")[0]}</p>
                           <p
                             className={
-                              registro.pago === true ? "pago-true" : "pago-false"
+                              registro.pago ? "pago-true" : "pago-false"
                             }
                           >
-                            {registro.pago === true ? "Pago" : "No Pago"}
+                            {registro.pago ? "Pago" : "No Pago"}
                           </p>
                         </div>
 
@@ -121,9 +126,13 @@ const ViewRegistros = () => {
                           <input
                             className="form-check-input"
                             type="checkbox"
-                            checked={registro.pago === true}
+                            checked={registro.pago}
                             onChange={() =>
-                              cambiarEstadoPago(alumno.id, registro.id, registro.pago)
+                              cambiarEstadoPago(
+                                alumno.id,
+                                registro.id,
+                                registro.pago
+                              )
                             }
                           />
                         </div>
