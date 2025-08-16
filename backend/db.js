@@ -3,8 +3,8 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,  // <- Render lo define automáticamente
-  ssl: { rejectUnauthorized: false },         // obligatorio en Render
+  connectionString: process.env.DATABASE_URL, // Render injecta esta variable automáticamente
+  ssl: { rejectUnauthorized: false },
 });
 
 export default pool;
