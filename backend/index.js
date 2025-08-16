@@ -27,3 +27,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor en puerto ${PORT}`);
 });
+
+app.get('/', (req, res) => {
+  res.send('Servidor backend funcionando 🚀');
+});
