@@ -35,36 +35,36 @@ const Asistencias = () => {
   }, [API_URL]);
 
   // Registrar asistencia
-  const handleRegistro = async () => {
-    if (selectAlumno === "-1" || !fecha) {
-      alert("Por favor, seleccione un alumno y una fecha válida.");
-      return;
-    }
+const handleRegistro = async () => {
+  if (selectAlumno === "-1" || !fecha) {
+    alert("Por favor, seleccione un alumno y una fecha válida.");
+    return;
+  }
 
-    const fechaFormateada = convertirFecha(new Date(fecha));
+  const fechaFormateada = new Date(fecha).toISOString().split("T")[0];
 
-    try {
-      const res = await fetch(`${API_URL}/registros`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          alumno_id: selectAlumno,
-          fecha: fechaFormateada,
-          pago: pago,
-        }),
-      });
+  try {
+    const res = await fetch(`${API_URL}/registros`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        alumno_id: selectAlumno,
+        fecha: fechaFormateada,
+        pago: pago,
+      }),
+    });
 
-      if (!res.ok) throw new Error("Error al registrar asistencia");
+    if (!res.ok) throw new Error("Error al registrar asistencia");
 
-      setSelectAlumno("-1");
-      setFecha("");
-      setPago(false);
-      setMensajeExito("¡Registro exitoso!");
-      setTimeout(() => setMensajeExito(""), 5000);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+    setSelectAlumno("-1");
+    setFecha("");
+    setPago(false);
+    setMensajeExito("¡Registro exitoso!");
+    setTimeout(() => setMensajeExito(""), 5000);
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
   return (
     <section className="d-flex flex-column align-items-center asistencias">
