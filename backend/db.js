@@ -1,8 +1,8 @@
+// db.js
 import dotenv from 'dotenv';
 import pkg from 'pg';
 
 dotenv.config();
-
 const { Pool } = pkg;
 
 const pool = new Pool({
@@ -11,9 +11,7 @@ const pool = new Pool({
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
-  ssl: {
-    rejectUnauthorized: false, // obligatorio para Render Postgres
-  },
+  ssl: { rejectUnauthorized: false }, // obligatorio para Render Postgres
 });
 
 export default pool;
