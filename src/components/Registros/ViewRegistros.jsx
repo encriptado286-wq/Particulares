@@ -7,12 +7,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 const ViewRegistros = () => {
   const [alumnos, setAlumnos] = useState([]);
 
-  const cambiarEstadoPago = async (alumnoId, registroId, pagoActual) => {
+  const cambiarEstadoPago = async (alumno_id, registroId, pagoActual) => {
     const nuevoPago = pagoActual === true ? false : true;
 
     setAlumnos(prevAlumnos =>
       prevAlumnos.map(alumno => {
-        if (alumno.id === alumnoId) {
+        if (alumno.id === alumno_id) {
           const nuevosRegistros = alumno.registros.map(registro => {
             if (registro.id === registroId) {
               return { ...registro, pago: nuevoPago };
@@ -30,7 +30,7 @@ const ViewRegistros = () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          alumnoId,
+          alumno_id,
           fecha: new Date().toISOString().split("T")[0], // o mantener la original si querés
           pago: nuevoPago
         })
