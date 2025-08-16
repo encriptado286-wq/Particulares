@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas de tu API
-app.use('/alumnos', alumnosRouter);
-app.use('/registros', registrosRouter);
+app.use('/api/alumnos', alumnosRouter);
+app.use('/api/registros', registrosRouter);
 
 // Ruta raíz de prueba
 app.get('/', (req, res) => {
