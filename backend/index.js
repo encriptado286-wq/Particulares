@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import alumnosRouter from './routes/alumnos.js';
-import registrosRouter from './routes/registros.js';
+import alumnosRouter from './rutas/alumnos.js';
+import registrosRouter from './rutas/registros.js';
 
 dotenv.config();
 const app = express();
