@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const result = await pool.query('SELECT * FROM alumnos ORDER BY id');
     res.json(result.rows);
   } catch (error) {
-    console.error('Error al obtener alumnos:', error);
+    console.error('❌ Error al obtener alumnos:', error.message);
     res.status(500).json({ error: 'Error al obtener alumnos' });
   }
 });
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error('Error insertando alumno:', error);
+    console.error('❌ Error insertando alumno:', error.message);
     res.status(500).json({ error: 'Error al insertar alumno' });
   }
 });
