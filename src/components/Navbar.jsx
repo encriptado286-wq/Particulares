@@ -1,68 +1,72 @@
+
 import './StyleComp.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import bee from '../img/bee.gif'; 
 
 const Navbar = () => {
-  const location = useLocation(); // obtener ubicación actual
+  const location = useLocation(); // obtener la ruta actual
 
-  // Barra para vista Home
-const isHome = location.pathname === '/';
+  // Barra especial para la página Home
+  const isHome = location.pathname === '/';
+  if (isHome) {
+    return (
+      <div className='fondoDelDiv'>
+        <div className='divFondoNav d-flex align-items-center'>
+          <img src={bee} alt="Bee" className="bee-image rounded-circle" />
+          <h1 className='h1Home text-center'>
+            Sistema de Registración en Asistencias y Alumnos
+          </h1>
 
-if (isHome) {
-  return (
-    <div className='fondoDelDiv'>
-    <div className='divFondoNav d-flex align-items-center'>
-  <img src={bee} alt="Bee" className="bee-image rounded-circle" />
-    <h1 className='h1Home text-center'>Sistema de Registración en Asistencias y Alumnos</h1>
-  
-    <nav className="navBar-home">
-      <a href="/asistencias" className="nav-item btnAsist" data-tooltip="Añadir Asistencia">
-        <i className="bi bi-journal-check"></i>
-      </a>
-  
-      <a href="/addAlumnos" className="nav-item btnAlumn" data-tooltip="Agregar Alumno">
-        <i className="bi bi-person-fill-add"></i>
-      </a>
-  
-      <a href="/registros" className="nav-item btnRegs" data-tooltip="Ver Registros">
-        <i className="bi bi-bookmark-check-fill"></i>
-      </a>
-    </nav>
-  </div>
-  </div>
-  );
-}
+          <nav className="navBar-home">
+            <Link to="/asistencias" className="nav-item btnAsist" data-tooltip="Añadir Asistencia">
+              <i className="bi bi-journal-check"></i>
+            </Link>
+
+            <Link to="/addAlumnos" className="nav-item btnAlumn" data-tooltip="Agregar Alumno">
+              <i className="bi bi-person-fill-add"></i>
+            </Link>
+
+            <Link to="/registros" className="nav-item btnRegs" data-tooltip="Ver Registros">
+              <i className="bi bi-bookmark-check-fill"></i>
+            </Link>
+          </nav>
+        </div>
+      </div>
+    );
+  }
 
   // Barra de navegación normal para otras vistas
-  // Definir la clase("color") para la barra de navegación según la ruta
-  let navbarClass = 'custom-navbar'; // Clase por defecto
-  
-  // Cambiar el color de fondo dependiendo de la ruta actual
-  if (location.pathname === '/') {
-    navbarClass = 'custom-navbar default-bg'; //Fondo blanco en la página de inicio
-  } else if (location.pathname === '/asistencia') {
-    navbarClass = 'custom-navbar purple-bg'; //Fondo purpura en la página de asistencia
-  } else if (location.pathname === '/addAlumno') {
-    navbarClass = 'custom-navbar amarelo-bg'; //Fondo amarillo normal en la página de configuración
-  } 
+  let navbarClass = 'custom-navbar'; // clase por defecto
+
+  if (location.pathname === '/asistencias') {
+    navbarClass = 'custom-navbar purple-bg';
+  } else if (location.pathname === '/addAlumnos') {
+    navbarClass = 'custom-navbar amarelo-bg';
+  } else if (location.pathname === '/registros') {
+    navbarClass = 'custom-navbar blue-bg'; // puedes definir el color que quieras
+  }
+
   return (
     <nav className={`navbar navbar-dark navbar-expand fixed-bottom justify-content-around ${navbarClass}`}>
-      <a href="/" className="nav-link text-light text-center">
+      <Link to="/" className="nav-link text-light text-center">
         <i className="bi bi-house-door"></i>
         <div>Inicio</div>
-      </a>
-      <a href="/asistencias" className="nav-link text-light text-center">
+      </Link>
+
+      <Link to="/asistencias" className="nav-link text-light text-center">
         <i className="bi bi-journal-check"></i>
         <div>+ Asistencias</div>
-      </a>
-      <a href="/addAlumnos" className="nav-link text-light text-center">
+      </Link>
+
+      <Link to="/addAlumnos" className="nav-link text-light text-center">
         <i className="bi bi-person-fill-add"></i>
         <div>+ Alumno</div>
-      </a>
-      <a href="/registros" className="nav-link text-light text-center">
+      </Link>
+
+      <Link to="/registros" className="nav-link text-light text-center">
         <i className="bi bi-bookmark-check-fill"></i>
         <div>Registros</div>
-      </a>
+      </Link>
     </nav>
   );
 };
