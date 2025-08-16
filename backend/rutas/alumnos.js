@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import pool from '../db.js';
 
-const pool = require('../db');  // Importamos el pool centralizado
+const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
@@ -36,4 +36,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
