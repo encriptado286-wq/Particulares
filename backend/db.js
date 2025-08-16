@@ -1,16 +1,13 @@
 import dotenv from 'dotenv';
 import pkg from 'pg';
-
 dotenv.config();
 const { Pool } = pkg;
 
+const connectionString = process.env.DATABASE_URL || `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
+
 const pool = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,      // SOLO el host, sin usuario ni contraseña
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
-  ssl: { rejectUnauthorized: false }, // obligatorio en Render Postgres
+  connectionString,
+  ssl: { rejectUnauthorized: false }, // obligatorio para Render
 });
 
 export default pool;
