@@ -1,13 +1,10 @@
-import dotenv from 'dotenv';
+// db.js
 import pkg from 'pg';
-dotenv.config();
 const { Pool } = pkg;
 
-const connectionString = process.env.DATABASE_URL || `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
-
 const pool = new Pool({
-  connectionString,
-  ssl: { rejectUnauthorized: false }, // obligatorio para Render
+  connectionString: process.env.DATABASE_URL,  // <- Render lo define automáticamente
+  ssl: { rejectUnauthorized: false },         // obligatorio en Render
 });
 
 export default pool;
