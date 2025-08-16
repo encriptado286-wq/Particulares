@@ -5,25 +5,26 @@ import path from 'path';
 
 import alumnosRouter from './rutas/alumnos.js';
 import registrosRouter from './rutas/registros.js';
-
+import pool from './db.js';
 
 dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Rutas de tu API
+// API routes
 app.use('/api/alumnos', alumnosRouter);
 app.use('/api/registros', registrosRouter);
 
-// Servir el frontend (React build)
-app.use(express.static(path.join(__dirname, 'dist')));
+// Servir frontend desde carpeta build
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// Redirigir todas las rutas no encontradas al index.html (SPA)
+// SPA rewrite: todas las rutas van a index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
