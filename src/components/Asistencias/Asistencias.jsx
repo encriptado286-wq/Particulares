@@ -119,7 +119,7 @@ const handleRegistro = async () => {
 export default Asistencias;*/
 
 import { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import Calendario from "../Calendario";
 import "./StyleAsist.css";
 const API_URL = import.meta.env.VITE_API_URL;
@@ -189,9 +189,11 @@ const Asistencias = () => {
       <Form className="formAsist">
         <Form.Group controlId="selectAlumno" className="mb-3 d-flex justify-content-center">
           **{cargando ? (
-            <Form.Control as="select" disabled>
-              <option>Cargando alumnos...</option>
-            </Form.Control>
+            <div className="text-center">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Cargando alumnos...</span>
+              </Spinner>
+            </div>
           ) : (
             <Form.Control
               as="select"
