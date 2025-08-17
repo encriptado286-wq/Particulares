@@ -9,11 +9,12 @@ const AddAlumnos = () => {
   const [telefono, setTelefono] = useState("");
   const [alumnos, setAlumnos] = useState([]);
   const [mostrarTabla, setMostrarTabla] = useState(false);
-
+  const [cargando, setCargando] = useState(true); // Estado de carga
 
   // Cargar alumnos desde la API backend
   useEffect(() => {
     const cargarAlumnos = async () => {
+      setCargando(true);
       try {
         const res = await fetch(`${API_URL}/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
@@ -21,10 +22,12 @@ const AddAlumnos = () => {
         setAlumnos(data);
       } catch (error) {
         alert(error.message);
+      } finally {
+        setCargando(false);
       }
     };
     cargarAlumnos();
-  }, [API_URL]);
+  }, []); // se ejecuta solo al montar el componente
 
   // Enviar nuevo alumno al backend
   const handleSubmit = async (e) => {
@@ -59,59 +62,40 @@ const AddAlumnos = () => {
       <h1 className="text-center">Agregar Alumno</h1>
       <div className="content">
         {!mostrarTabla ? (
-          <form onSubmit={handleSubmit} className="form-container">
-            <div>
-              <label htmlFor="nombre" className="form-label">
-                Nombre y Apellido
-              </label>
-              <input
-                type="text"
-                id="nombre"
-                className="form-control"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                placeholder="Nombre del alumno"
-              />
-            </div>
-            <div className="mb-3 mt-1">
-              <label htmlFor="grado" className="form-label">
-                Grado
-              </label>
-              <input
-                type="text"
-                id="grado"
-                className="form-control"
-                value={grado}
-                onChange={(e) => setGrado(e.target.value)}
-                placeholder="Grado del alumno"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="telefono" className="form-label">
-                Teléfono
-              </label>
-              <input
-                type="text"
-                id="telefono"
-                className="form-control"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-                placeholder="Teléfono del alumno"
-              />
-            </div>
-            <div className="button-container">
-              <button type="submit" className="btn btnAdd">
-                Agregar Alumno
-              </button>
-              <button
-                type="button"
-                className="btn btnViewTable ms-2"
-                onClick={() => setMostrarTabla(true)}
-              >
-                Ver Tabla
-              </button>
-            </div>
+          <form onSubmit={handleSubmit} className="form-alumnos">
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Grado"
+              value={grado}
+              onChange={(e) => setGrado(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Teléfono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+            />
+            <button type="submit" className="btn btnAdd">
+              Guardar Alumno
+            </button>
+            <button
+              type="button"
+              className="btn btnShow"
+              onClick={() => setMostrarTabla(true)}
+            >
+              Ver Alumnos
+            </button>
           </form>
+        ) : cargando ? (
+          <div className="text-center mt-5">
+            <h2>Cargando alumnos... ⏳</h2>
+          </div>
         ) : (
           <div>
             <button
