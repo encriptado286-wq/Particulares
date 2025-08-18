@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Spinner, Accordion } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Accordion from "react-bootstrap/Accordion";
 import "./StyleRegistro.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ViewRegistros = () => {
   const [alumnos, setAlumnos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   const cambiarEstadoPago = async (alumno_id, registroId, pagoActual) => {
     const nuevoPago = !pagoActual;
@@ -46,7 +47,7 @@ const ViewRegistros = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("API_URL:", API_URL); // Verificar URL
+        console.log("API_URL:", API_URL);
         const [alumnosRes, registrosRes] = await Promise.all([
           fetch(`${API_URL}/alumnos`),
           fetch(`${API_URL}/registros`)
@@ -55,7 +56,6 @@ const ViewRegistros = () => {
         const alumnosData = await alumnosRes.json();
         const registrosData = await registrosRes.json();
 
-        // Corregimos el nombre del campo: alumno_id
         const alumnosConRegistros = alumnosData.map(alumno => {
           const registrosDelAlumno = registrosData.filter(
             registro => registro.alumno_id === alumno.id
@@ -66,16 +66,27 @@ const ViewRegistros = () => {
         setAlumnos(alumnosConRegistros);
       } catch (error) {
         console.error("Error al obtener datos:", error);
+      } finally {
+        setCargando(false); // 🔹 Quitamos la carga siempre al final
       }
     };
 
     fetchData();
   }, []);
 
-  return (
-    <section className="viewRegistros">
-      <h1 className="text-center">Listado de Registros</h1>
+return (
+  <section className="viewRegistros">
+    <h1 className="text-center">Listado de Registros</h1>
 
+    {cargando ? (
+      // 🔹 Spinner solo mientras carga
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      </div>
+    ) : (
+      // 🔹 Cuando termina la carga muestra el contenido
       <Accordion>
         {alumnos.map(alumno => (
           <Accordion.Item eventKey={alumno.id.toString()} key={alumno.id}>
@@ -99,24 +110,12 @@ const ViewRegistros = () => {
                 <ul>
                   {alumno.registros
                     .slice()
-                    .sort((a, b) => {
-                      const fechaA = new Date(a.fecha);
-                      const fechaB = new Date(b.fecha);
-                      if (isNaN(fechaA.getTime()) || isNaN(fechaB.getTime())) {
-                        console.error("Fecha no válida", a.fecha, b.fecha);
-                        return 0;
-                      }
-                      return fechaB - fechaA;
-                    })
+                    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
                     .map(registro => (
                       <li key={registro.id}>
                         <div className="d-block">
                           <p>{registro.fecha.split("T")[0]}</p>
-                          <p
-                            className={
-                              registro.pago ? "pago-true" : "pago-false"
-                            }
-                          >
+                          <p className={registro.pago ? "pago-true" : "pago-false"}>
                             {registro.pago ? "Pago" : "No Pago"}
                           </p>
                         </div>
@@ -128,11 +127,7 @@ const ViewRegistros = () => {
                             type="checkbox"
                             checked={registro.pago}
                             onChange={() =>
-                              cambiarEstadoPago(
-                                alumno.id,
-                                registro.id,
-                                registro.pago
-                              )
+                              cambiarEstadoPago(alumno.id, registro.id, registro.pago)
                             }
                           />
                         </div>
@@ -147,8 +142,9 @@ const ViewRegistros = () => {
           </Accordion.Item>
         ))}
       </Accordion>
-    </section>
-  );
+    )}
+  </section>
+);
 };
 
 export default ViewRegistros;

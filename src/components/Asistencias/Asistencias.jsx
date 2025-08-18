@@ -51,21 +51,17 @@ const Asistencias = () => {
           pago: pago,
         }),
       });
-      
-    console.log("Respuesta del backend:", res.status); // 👈 LOG DE CONTROL
 
       if (!res.ok) throw new Error("Error al registrar asistencia");
 
       setSelectAlumno("-1");
       setFecha("");
       setPago(false);
-      setMensajeExito("¡Registro exitoso!");
-       console.log("Mensaje de éxito seteado ✔");
+      setMensajeExito("¡Registro exitoso! ✔");
       setTimeout(() => {
-      console.log("Mensaje de éxito eliminado ⏱");
-      setMensajeExito("");
-    }, 5000);
-  } catch (error) {
+        setMensajeExito("");
+      }, 5000);
+    } catch (error) {
       alert(error.message);
     }
   };
@@ -75,29 +71,37 @@ const Asistencias = () => {
       <h1 className="text-center">Añadir Asistencia</h1>
 
       <Form className="formAsist">
-        <Form.Group controlId="selectAlumno" className="mb-3 d-flex justify-content-center">
-          **{cargando ? (
-            <div className="text-center">
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">Cargando alumnos...</span>
-              </Spinner>
-            </div>
-          ) : (
-            <Form.Control
-              as="select"
-              value={selectAlumno}
-              onChange={(e) => setSelectAlumno(e.target.value)}
-            >
-              <option value="-1">Seleccione Alumn@</option>
-              {alumnos.map((alumno) => (
-                <option key={alumno.id} value={alumno.id}>
-                  {alumno.nombre}
-                </option>
-              ))}
-            </Form.Control>
-          )}**
-        </Form.Group>
+        <Form.Group controlId="selectAlumno" className="mb-3 d-flex align-items-center">
+          <Form.Control
+            as="select"
+            value={selectAlumno}
+            onChange={(e) => setSelectAlumno(e.target.value)}
+            disabled={cargando}
+          >
+            {cargando ? (
+              <option>Cargando alumnos... ⏱</option>
+            ) : (
+              <>
+                <option value="-1">Seleccionar Alumn@</option>
+                {alumnos.map((alumno) => (
+                  <option key={alumno.id} value={alumno.id}>
+                    {alumno.nombre}
+                  </option>
+                ))}
+              </>
+            )}
+          </Form.Control>
 
+          {cargando && (
+            <Spinner
+              animation="border"
+              size="lg"
+              role="status"
+              className="ms-2 text-primary"
+            >
+            </Spinner>
+          )}
+        </Form.Group>
         <div className="d-flex justify-content-center calendar-container">
           <Form.Group controlId="fecha">
             <Calendario setFecha={setFecha} fechaSeleccionada={fecha} />
@@ -121,9 +125,9 @@ const Asistencias = () => {
             Registrar
           </Button>
         </div>
+        {mensajeExito && <div className="alert alert-success mt-2">{mensajeExito}</div>}
       </Form>
 
-      {mensajeExito && <div className="alert alert-success mt-2">{mensajeExito}</div>}
     </section>
   );
 };

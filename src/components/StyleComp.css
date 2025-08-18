@@ -29,7 +29,7 @@
   }
 
 .fondoDelDiv{
-  background-image: url("/img/fondoNew2.jpg");
+  background-image: url("/img/wtffk.jpeg");
   background-size: 100% ;
  
 }
@@ -65,8 +65,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5rem;
-    margin-top: 85px;
+    gap: 7.5rem;
+    margin-top: 105px;
     margin-right: 8px;
   }
   
