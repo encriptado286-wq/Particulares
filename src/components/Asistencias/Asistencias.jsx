@@ -1,5 +1,4 @@
 
-
 import { useState, useEffect } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import Calendario from "../Calendario";
@@ -82,9 +81,8 @@ const Asistencias = () => {
               <option>Cargando alumnos... ⏱</option>
             ) : (
               <>
-                <option value="-1">Seleccionar Alumn@</option>
                 {alumnos.map((alumno) => (
-                  <option key={alumno.id} value={alumno.id}>
+                  <option key={alumno.id} value={alumno.id} className="text-center">
                     {alumno.nombre}
                   </option>
                 ))}
@@ -109,7 +107,7 @@ const Asistencias = () => {
         </div>
 
         <div className="d-flex justify-content-start">
-          <p className="mt-2 pAsist">Seleccione Pago</p>
+          <p className="mt-2 pAsist">Seleccionar Pago</p>
           <Form.Group controlId="pago">
             <Form.Check
               className="mx-3 mt-2 checkBox"

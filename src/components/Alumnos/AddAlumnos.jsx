@@ -70,7 +70,7 @@ const AddAlumnos = () => {
                 className="form-control"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                placeholder="Nombre del alumno"
+                placeholder="Ingresar Nombre"
               />
             </div>
             <div className="mb-3 mt-1">
@@ -83,7 +83,7 @@ const AddAlumnos = () => {
                 className="form-control"
                 value={grado}
                 onChange={(e) => setGrado(e.target.value)}
-                placeholder="Grado del alumno"
+                placeholder="Ingresar Grado"
               />
             </div>
             <div className="mb-3">
@@ -96,7 +96,7 @@ const AddAlumnos = () => {
                 className="form-control"
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
-                placeholder="Teléfono del alumno"
+                placeholder="Ingresar Teléfono"
               />
             </div>
             <div className="button-container">

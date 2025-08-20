@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Spinner, Accordion } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,7 +13,6 @@ const ViewRegistros = () => {
   const cambiarEstadoPago = async (alumno_id, registroId, pagoActual) => {
     const nuevoPago = !pagoActual;
 
-    // Actualizar estado localmente
     setAlumnos(prevAlumnos =>
       prevAlumnos.map(alumno => {
         if (alumno.id === alumno_id) {
@@ -74,77 +74,76 @@ const ViewRegistros = () => {
     fetchData();
   }, []);
 
-return (
-  <section className="viewRegistros">
-    <h1 className="text-center">Listado de Registros</h1>
-
-    {cargando ? (
-      // 🔹 Spinner solo mientras carga
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>
+  return (
+    <section className="viewRegistros">
+      <h1 className="text-center">Listado de Registros</h1>
+      {cargando ? (
         <Spinner animation="border" role="status" variant="primary">
-          <span className="visually-hidden">Cargando...</span>
+          <p>⏱</p>
         </Spinner>
-      </div>
-    ) : (
-      // 🔹 Cuando termina la carga muestra el contenido
-      <Accordion>
-        {alumnos.map(alumno => (
-          <Accordion.Item eventKey={alumno.id.toString()} key={alumno.id}>
-            <Accordion.Header>
-              <h2>{alumno.nombre}</h2>
-            </Accordion.Header>
-            <Accordion.Body>
-              <h5>Datos Alumno:</h5>
-              <div className="d-flex justify-content-start">
-                <p className="mx-5">
-                  <strong>Grado:</strong> {alumno.grado}
-                </p>
-                <p>
-                  <strong>Teléfono:</strong> {alumno.telefono}
-                </p>
-              </div>
-              <hr />
+      ) : (
+        <Accordion>
+          {alumnos.map(alumno => (
+            <Accordion.Item eventKey={alumno.id.toString()} key={alumno.id}>
+              <Accordion.Header>
+                <h2>{alumno.nombre}</h2>
+              </Accordion.Header>
+              <Accordion.Body>
+                <h5>Datos Alumno:</h5>
+                <div className="d-flex justify-content-start">
+                  <p className="mx-5">
+                    <strong>Grado:</strong> {alumno.grado}
+                  </p>
+                  <p>
+                    <strong>Teléfono:</strong> {alumno.telefono}
+                  </p>
+                </div>
+                <hr />
 
-              <h5>Registros:</h5>
-              {alumno.registros && alumno.registros.length > 0 ? (
-                <ul>
-                  {alumno.registros
-                    .slice()
-                    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-                    .map(registro => (
-                      <li key={registro.id}>
-                        <div className="d-block">
-                          <p>{registro.fecha.split("T")[0]}</p>
-                          <p className={registro.pago ? "pago-true" : "pago-false"}>
-                            {registro.pago ? "Pago" : "No Pago"}
-                          </p>
-                        </div>
+                <h5>Registros:</h5>
+                {alumno.registros && alumno.registros.length > 0 ? (
+                  <ul>
+                    {alumno.registros
+                      .slice()
+                      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+                      .map(registro => (
+                        <li key={registro.id}>
+                          <div className="d-block">
+                            <p>{registro.fecha.split("T")[0]}</p>
+                            <p className={registro.pago ? "pago-true" : "pago-false"}>
+                              {registro.pago ? "Pago" : "No Pago"}
+                            </p>
+                          </div>
 
-                        <strong>Confirmar Pago</strong>
-                        <div className="form-switch">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            checked={registro.pago}
-                            onChange={() =>
-                              cambiarEstadoPago(alumno.id, registro.id, registro.pago)
-                            }
-                          />
-                        </div>
-                        <hr />
-                      </li>
-                    ))}
-                </ul>
-              ) : (
-                <p>No hay registros disponibles.</p>
-              )}
-            </Accordion.Body>
-          </Accordion.Item>
-        ))}
-      </Accordion>
-    )}
-  </section>
-);
+                          {!registro.pago && (
+                            <>
+                              <strong>Confirmar Pago</strong>
+                              <div className="form-switch">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  checked={registro.pago}
+                                  onChange={() =>
+                                    cambiarEstadoPago(alumno.id, registro.id, registro.pago)
+                                  }
+                                />
+                              </div>
+                            </>
+                          )}
+                          <hr />
+                        </li>
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No hay registros disponibles.</p>
+                )}
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      )}
+    </section>
+  );
 };
 
-export default ViewRegistros;
+export default ViewRegistros; 

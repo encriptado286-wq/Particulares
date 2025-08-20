@@ -11,13 +11,10 @@
 
 /* Formulario */
 .form-container {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: #fff894dc;
     border-radius: 8px;
     padding: 20px;
    
-}
-.form-label {
-    color: white;
 }
 
 /* Contenedor específico para el botón */
@@ -30,7 +27,7 @@
 }
 
 .btnAdd {
-    background-color: #da6ebf !important;
+    background-color: rgba(241, 171, 214, 0.952) !important;
     color: white !important;
     border: none;
     border-radius: 5px;

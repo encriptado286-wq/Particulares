@@ -1,168 +1,280 @@
+/*Estilos para Celular*/
+
 /* Estilos para la barra de navegación secundaria*/
 .custom-navbar {
-    background-color:rgba(123, 52, 145, 0.952) !important;
-    height: 48px;
-    margin-top: 50px;
-  } 
-  
-  .custom-navbar .nav-link i {
-    font-size: 18px; /* Tamaño de los íconos */
-    color: black;
-  }
-  
-  .custom-navbar .nav-link div {
-    color: black;
-    font-size: 12px; /* Tamaño del texto debajo de los íconos */
-  }
-  
-  .custom-navbar.amarelo-bg {
-    background-color: #fff894dc !important; /* Color de fondo por defecto */
-  }
-  
-  .custom-navbar.purple-bg {
-    background-color: rgba(241, 171, 214, 0.952) !important;
-  
-  }
- 
-  .custom-navbar.default-bg {
-    background-color: white !important;
-  }
-
-.fondoDelDiv{
-  background-image: url("/img/wtffk.jpeg");
-  background-size: 100% ;
- 
+  background-color: rgba(123, 52, 145, 0.952) !important;
+  height: 48px;
+  margin-top: 50px;
 }
 
-  .divFondoNav {
-    background-image: url("/img/fondo2.jpeg");
-    background-size: 100% 75% ; /* Cubre toda la pantalla */
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-  }
-  
-  .bee-image {
-    width: 70px; 
-    position: absolute; 
-    top: 0; /* Colocamos la imagen en la parte superior */
-    left: 50%; /* Centra la imagen horizontalmente */
-    transform: translateX(-50%); /* Ajuste para centrar la imagen */
-    margin-top: 150px;
-  }
+.custom-navbar .nav-link i {
+  font-size: 18px;
+  color: black;
+}
 
-  .h1Home {
-    display: flex;
-    align-items: center;
-    font-size: 3.1rem;
-    color: blueviolet;
-    word-spacing: 90px;
-    margin-top: 50px; 
-    margin-left: 25px;
-  }
-  
-  .navBar-home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 7.5rem;
-    margin-top: 105px;
-    margin-right: 8px;
-  }
-  
-  .nav-item {
-    display: flex;
-    text-decoration: none;
-    color: blueviolet;
-    position: relative; /* Necesario para posicionar el tooltip */
-  }
-  .nav-item::after {
-    content: attr(data-tooltip); /* Toma el valor del atributo data-tooltip */
-    position: absolute;
-    bottom: 100%; /* Coloca el tooltip arriba del elemento */
-    left: 30%;
-    transform: translateX(-50%); /* Centra el tooltip horizontalmente */
-    background-color: blueviolet;
-    color: white; /* Texto blanco */
-    padding: 5px;
-    border-radius: 5px;
-    visibility: hidden; /* No visible por defecto */
-    opacity: 0; /* Transparentes hasta que se muestre */
-    transition: opacity 1s ease; /* Suaviza la aparición */
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-  }
+.custom-navbar .nav-link div {
+  color: black;
+  font-size: 12px;
+  /* Tamaño del texto debajo de los íconos */
+}
 
-  .nav-item i {
-    border-radius: 15%;
-    font-size: 3rem;
-  }
+.custom-navbar.amarelo-bg {
+  background-color: #fff894dc !important;
+}
 
-  .btnAsist:hover{
-    margin-top: 15px;
-    align-items: center;
-    width: 68px;
-    height: 55px;
-    transform: translateX(-20px); 
-    border-radius: 5px;
-    background-color: rgba(204, 132, 200, 0.877);
-    transition: all 0.6s ease; /* 0.6 segundos de transición suave */
-  }
-  .btnAsist:hover::after{
-    visibility: visible; /* Hace que el tooltip sea visible */
-    opacity: 1; /* Hace que el tooltip sea completamente opaco */
-    transition: all 1s ease; /* Aquí se hace más lento (1 segundo) */
-  }
-  .btnAlumn:hover{
-    align-items: center;
-    width: 68px;
-    height: 85px;
-    transform: translateX(-20px); 
-    border-radius: 5px;
-    background-color: rgba(253, 238, 104, 0.685);
-   transition: all 0.6s ease; /* 0.6 segundos de transición suave */
-  }
-  .btnAlumn:hover::after{
-    visibility: visible; /* Hace que el tooltip sea visible */
-    opacity: 1; /* Hace que el tooltip sea completamente opaco */
-    transition: all 1s ease; /* Aquí se hace más lento (1 segundo) */
-  }
-    
-.btnRegs:hover{
+.custom-navbar.purple-bg {
+  background-color: rgba(241, 171, 214, 0.952) !important;
+
+}
+
+.custom-navbar.default-bg {
+  background-color: white !important;
+}
+
+.fondoDelDiv {
+  background-image: url("/img/wtffk.jpeg");
+  background-size: 100%;
+}
+
+.divFondoNav {
+  background-image: url("/img/fondo2.jpeg");
+  background-size: 100% 75%;
+  /* Cubre toda la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+/* Posiciona la imagen de la abeja */
+.bee-image {
+  width: 70px;
+  position: absolute;
+  /*colocarla en la parte superior*/
+  top: 0;
+  left: 50%;
+  /* Centra la imagen horizontalmente */
+  transform: translateX(-50%);
+  margin-top: 150px;
+}
+
+.h1Home {
+  display: flex;
+  align-items: center;
+  font-size: 3.1rem;
+  color: blueviolet;
+  word-spacing: 90px;
+  margin-top: 50px;
+  margin-left: 25px;
+}
+
+.navBar-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7.5rem;
+  margin-top: 105px;
+  margin-right: 8px;
+}
+
+.nav-item {
+  display: flex;
+  text-decoration: none;
+  color: blueviolet;
+  position: relative;
+  /* Necesario para posicionar el tooltip */
+}
+
+.nav-item::after {
+  content: attr(data-tooltip);
+  /* Toma el valor del atributo data-tooltip */
+  position: absolute;
+  bottom: 100%;
+  /* Coloca el tooltip arriba del elemento */
+  left: 30%;
+  transform: translateX(-50%);
+  /* Centra el tooltip horizontalmente */
+  background-color: blueviolet;
+  color: white;
+  /* Texto blanco */
+  padding: 5px;
+  border-radius: 5px;
+  visibility: hidden;
+  /* No visible por defecto */
+  opacity: 0;
+  /* Transparentes hasta que se muestre */
+  transition: opacity 1s ease;
+  /* Suaviza la aparición */
+  white-space: nowrap;
+  /* Evita que el texto se divida en varias líneas */
+}
+
+.nav-item i {
+  border-radius: 15%;
+  font-size: 3rem;
+}
+
+.btnAsist:hover {
+  margin-top: 15px;
+  align-items: center;
+  width: 68px;
+  height: 45px;
+  transform: translateX(-20px);
+  border-radius: 5px;
+  background-color: rgba(204, 132, 200, 0.877);
+  transition: all 0.9s ease;
+  /* 0.6 segundos de transición suave */
+}
+
+.btnAsist:hover::after {
+  visibility: visible;
+  /* Hace que el tooltip sea visible */
+  opacity: 1;
+  /* Hace que el tooltip sea completamente opaco */
+  transition: all 1s ease;
+  /* Aquí se hace más lento (1 segundo) */
+}
+
+.btnAlumn:hover {
   align-items: center;
   width: 68px;
   height: 85px;
-  transform: translateX(-20px); 
+  transform: translateX(-20px);
+  border-radius: 5px;
+  background-color: rgba(253, 238, 104, 0.685);
+  transition: all 0.9s ease;
+  /* 0.6 segundos de transición suave */
+}
+
+.btnAlumn:hover::after {
+  visibility: visible;
+  /* Hace que el tooltip sea visible */
+  opacity: 1;
+  /* Hace que el tooltip sea completamente opaco */
+  transition: all 1s ease;
+  /* Aquí se hace más lento (1 segundo) */
+}
+
+.btnRegs:hover {
+  align-items: center;
+  width: 68px;
+  height: 85px;
+  transform: translateX(-20px);
   border-radius: 5px;
   background-color: rgb(231, 107, 113);
-  transition: all 0.6s ease; /* 0.6 segundos de transición suave */
+  transition: all 0.9s ease;
+  /* 0.6 segundos de transición suave */
 }
-.btnRegs:hover::after{
-  visibility: visible; /* Hace que el tooltip sea visible */
-  opacity: 1; /* Hace que el tooltip sea opaco */
-  transition: all 1s ease; /* Aquí se hace más lento (1 segundo) */
+
+.btnRegs:hover::after {
+  visibility: visible;
+  /* Hace que el tooltip sea visible */
+  opacity: 1;
+  /* Hace que el tooltip sea opaco */
+  transition: all 1s ease;
+  /* Aquí se hace más lento (1 segundo) */
 }
+
 /*Celular Flopy*/
-@media(max-width:365px){
+@media(max-width:365px) {
   .bee-image {
-    width: 40px; 
+    width: 40px;
     margin-top: 120px;
   }
 
   .h1Home {
-    font-size: 2.3rem; 
+    font-size: 2.3rem;
   }
-  
+
   .navBar-home {
     gap: 5rem;
     margin-top: 80px;
     margin-right: 1px;
   }
-  
+
   .nav-item {
     display: flex;
     text-decoration: none;
     color: blueviolet;
-    position: relative; /* Necesario para posicionar el tooltip */
+    position: relative;
+    /* Necesario para posicionar el tooltip */
   }
 
+}
+
+@media(min-width:812px) {
+
+  .fondoDelDiv {
+  background-image: none;
+
+}
+
+  .contH1Home {
+    margin-top: 50px;
+    margin-left: 50px;
+  }
+
+  .h1Home {
+    font-size: 3rem;
+    word-spacing: 20px;
+    max-width: 90%;
+  }
+
+  .bee-image {
+    width: 130px;
+    margin-top: 120px;
+  }
+
+  .navBar-home {
+    gap: 5rem;
+    margin-top: 65px;
+    margin-right: 28px;
+  }
+
+  .btnAlumn:hover {
+    width: 68px;
+    height: 55px;
+  }
+
+  .btnRegs:hover {
+    width: 68px;
+    height: 55px;
+  }
+
+}
+
+@media (min-width: 366px) and (max-width: 811px) {
+
+  .h1Home {
+    font-size: 2.5rem;
+    word-spacing: 20px;
+    margin-top: 100px;
+  }
+
+  .navBar-home {
+    gap: 6.5rem;
+    margin-top: 65px;
+    margin-right: 8px;
+  }
+
+.nav-item i {
+  border-radius: 15%;
+  font-size: 2rem
+}
+
+    .btnAsist:hover {
+    margin-top: 15px;
+    align-items: center;
+    width: 68px;
+    height: 45px;
+  }
+
+   .btnAlumn:hover {
+    width: 68px;
+    height: 55px;
+  }
+
+  .btnRegs:hover {
+    width: 68px;
+    height: 55px;
+  }
 }

@@ -1,7 +1,7 @@
 
 import './StyleComp.css';
 import { useLocation, Link } from 'react-router-dom';
-import bee from '../img/bee.gif'; 
+import bee from '../img/bee.gif';
 
 const Navbar = () => {
   const location = useLocation(); // obtener la ruta actual
@@ -10,13 +10,14 @@ const Navbar = () => {
   const isHome = location.pathname === '/';
   if (isHome) {
     return (
-      <div className='fondoDelDiv'>
-        <div className='divFondoNav d-flex align-items-center'>
+      <main className='fondoDelDiv'>
+        <section className='divFondoNav d-flex align-items-center'>
           <img src={bee} alt="Bee" className="bee-image rounded-circle" />
-          <h1 className='h1Home text-center'>
-            Sistema de Registración en Asistencias y Alumnos
-          </h1>
-
+          <div className="contH1Home container text-center">
+            <h1 className="h1Home mx-auto">
+              Sistema de Registración en Asistencias y Alumnos
+            </h1>
+          </div>
           <nav className="navBar-home">
             <Link to="/asistencias" className="nav-item btnAsist" data-tooltip="Añadir Asistencia">
               <i className="bi bi-journal-check"></i>
@@ -30,8 +31,8 @@ const Navbar = () => {
               <i className="bi bi-bookmark-check-fill"></i>
             </Link>
           </nav>
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 
