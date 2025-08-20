@@ -242,7 +242,7 @@
 
 }
 
-@media (min-width: 366px) and (max-width: 811px) {
+@media (min-width: 466px) and (max-width: 811px) {
 
   .h1Home {
     font-size: 2.5rem;
@@ -251,14 +251,14 @@
   }
 
   .navBar-home {
-    gap: 6.5rem;
+    gap: 8rem;
     margin-top: 65px;
     margin-right: 8px;
   }
 
 .nav-item i {
   border-radius: 15%;
-  font-size: 2rem
+  font-size: 3rem
 }
 
     .btnAsist:hover {
