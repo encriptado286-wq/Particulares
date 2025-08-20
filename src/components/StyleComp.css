@@ -63,8 +63,6 @@
   font-size: 3.1rem;
   color: blueviolet;
   word-spacing: 90px;
-  margin-top: 50px;
-  margin-left: 25px;
 }
 
 .navBar-home {
@@ -81,7 +79,6 @@
   text-decoration: none;
   color: blueviolet;
   position: relative;
-  /* Necesario para posicionar el tooltip */
 }
 
 .nav-item::after {
@@ -114,7 +111,6 @@
 }
 
 .btnAsist:hover {
-  margin-top: 15px;
   align-items: center;
   width: 68px;
   height: 45px;
@@ -222,6 +218,11 @@
     width: 100px;
   }
 
+  .contH1Home {
+    margin-top: 50px;
+    margin-left: 40px;
+  }
+
   .h1Home {
     font-size: 3rem;
     word-spacing: 150px;
@@ -229,9 +230,8 @@
   }
 
   .navBar-home {
-    gap: 7.7rem;
-    margin-top: 65px;
-    margin-right: 8px;
+    gap: 8rem;
+    margin-top: 85px;
   }
 
   .nav-item i {
@@ -240,7 +240,6 @@
   }
 
   .btnAsist:hover {
-    margin-top: 15px;
     align-items: center;
     width: 68px;
     height: 45px;
