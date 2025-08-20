@@ -174,39 +174,13 @@
   /* Aquí se hace más lento (1 segundo) */
 }
 
-/*Celular Flopy*/
-@media(max-width:365px) {
-  .bee-image {
-    width: 40px;
-    margin-top: 120px;
-  }
-
-  .h1Home {
-    font-size: 2.3rem;
-  }
-
-  .navBar-home {
-    gap: 5rem;
-    margin-top: 80px;
-    margin-right: 1px;
-  }
-
-  .nav-item {
-    display: flex;
-    text-decoration: none;
-    color: blueviolet;
-    position: relative;
-    /* Necesario para posicionar el tooltip */
-  }
-
-}
-
+/* Estilos para pantallas más grandes */
 @media(min-width:812px) {
 
   .fondoDelDiv {
-  background-image: none;
+    background-image: none;
 
-}
+  }
 
   .contH1Home {
     margin-top: 50px;
@@ -242,33 +216,37 @@
 
 }
 
-@media (min-width: 466px) and (max-width: 811px) {
+@media (min-width: 366px) and (max-width: 811px) {
+
+  .bee-image {
+    width: 100px;
+  }
 
   .h1Home {
-    font-size: 2.5rem;
-    word-spacing: 20px;
-    margin-top: 100px;
+    font-size: 3rem;
+    word-spacing: 150px;
+    margin-top: 130px;
   }
 
   .navBar-home {
-    gap: 8rem;
+    gap: 7.7rem;
     margin-top: 65px;
     margin-right: 8px;
   }
 
-.nav-item i {
-  border-radius: 15%;
-  font-size: 3rem
-}
+  .nav-item i {
+    border-radius: 15%;
+    font-size: 3rem
+  }
 
-    .btnAsist:hover {
+  .btnAsist:hover {
     margin-top: 15px;
     align-items: center;
     width: 68px;
     height: 45px;
   }
 
-   .btnAlumn:hover {
+  .btnAlumn:hover {
     width: 68px;
     height: 55px;
   }
