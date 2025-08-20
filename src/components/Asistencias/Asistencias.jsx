@@ -21,7 +21,11 @@ const Asistencias = () => {
         const res = await fetch(`${API_URL}/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
         const data = await res.json();
-        setAlumnos(data);
+        if (data.length === 0) {
+          alert("No hay alumnos registrados. Por favor, añade un alumno primero.");
+        } else {
+          setAlumnos(data);
+        }
       } catch (error) {
         alert(error.message);
       } finally {
