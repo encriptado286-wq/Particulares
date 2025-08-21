@@ -47,7 +47,6 @@ const ViewRegistros = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("API_URL:", API_URL);
         const [alumnosRes, registrosRes] = await Promise.all([
           fetch(`${API_URL}/alumnos`),
           fetch(`${API_URL}/registros`)
@@ -67,7 +66,7 @@ const ViewRegistros = () => {
       } catch (error) {
         console.error("Error al obtener datos:", error);
       } finally {
-        setCargando(false); // 🔹 Quitamos la carga siempre al final
+        setCargando(false);
       }
     };
 
@@ -77,10 +76,17 @@ const ViewRegistros = () => {
   return (
     <section className="viewRegistros">
       <h1 className="text-center">Listado de Registros</h1>
-      {cargando ? (
-        <Spinner animation="border" role="status" variant="primary">
-          <p>⏱</p>
-        </Spinner>
+      {cargando  ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <h3 style={{ color: "white" }} className="me-3">Cargando Registros</h3>
+          <Spinner animation="border" role="status" variant="primary">
+            <p className="text-center">⏱</p>
+          </Spinner>
+        </div>
+      ) : alumnos.length === 0 ? (
+      <h3 className="text-center" style={{ color: "white" }}>
+        No hay registros para mostrar
+      </h3>
       ) : (
         <Accordion>
           {alumnos.map(alumno => (

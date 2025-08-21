@@ -10,7 +10,7 @@ const Asistencias = () => {
   const [selectAlumno, setSelectAlumno] = useState("-1");
   const [fecha, setFecha] = useState("");
   const [pago, setPago] = useState(false);
-  const [mensajeExito, setMensajeExito] = useState("");
+  const [mensajeExito, setMensaje] = useState("");
   const [cargando, setCargando] = useState(true); // Nuevo estado de carga
 
   // Cargar alumnos
@@ -21,11 +21,7 @@ const Asistencias = () => {
         const res = await fetch(`${API_URL}/alumnos`);
         if (!res.ok) throw new Error("Error al cargar alumnos");
         const data = await res.json();
-        if (data.length === 0) {
-          alert("No hay alumnos registrados. Por favor, añade un alumno primero.");
-        } else {
-          setAlumnos(data);
-        }
+        setAlumnos(data);
       } catch (error) {
         alert(error.message);
       } finally {
@@ -38,7 +34,7 @@ const Asistencias = () => {
   // Registrar asistencia
   const handleRegistro = async () => {
     if (selectAlumno === "-1" || !fecha) {
-      alert("Por favor, seleccione un alumno y una fecha válida.");
+      setMensaje("Por favor, seleccione un alumno y una fecha válida.");
       return;
     }
 
@@ -60,9 +56,9 @@ const Asistencias = () => {
       setSelectAlumno("-1");
       setFecha("");
       setPago(false);
-      setMensajeExito("¡Registro exitoso! ✔");
+      setMensaje("¡Registro exitoso! ✔");
       setTimeout(() => {
-        setMensajeExito("");
+        setMensaje("");
       }, 5000);
     } catch (error) {
       alert(error.message);
@@ -74,24 +70,25 @@ const Asistencias = () => {
       <h1 className="text-center">Añadir Asistencia</h1>
 
       <Form className="formAsist">
+        <p>Seleccionar Alumno y Fecha del registro</p>
         <Form.Group controlId="selectAlumno" className="mb-3 d-flex align-items-center">
           <Form.Control
             as="select"
             value={selectAlumno}
             onChange={(e) => setSelectAlumno(e.target.value)}
-            disabled={cargando}
           >
-            {cargando ? (
-              <option>Cargando alumnos... ⏱</option>
-            ) : (
-              <>
-                {alumnos.map((alumno) => (
-                  <option key={alumno.id} value={alumno.id} className="text-center">
-                    {alumno.nombre}
-                  </option>
-                ))}
-              </>
-            )}
+           {cargando && <option>Cargando alumnos... ⏱</option>}
+              {!cargando && alumnos.length === 0 && (
+            <option value={-1}>No hay alumnos registrados.</option>
+          )}
+
+          {!cargando && alumnos.length > 0 && (
+            <>
+              {alumnos.map((alumno) => (
+                <option key={alumno.id} value={alumno.id}> {alumno.nombre} </option>
+              ))}
+            </>
+          )}
           </Form.Control>
 
           {cargando && (
