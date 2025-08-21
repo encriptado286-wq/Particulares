@@ -70,7 +70,7 @@ const Asistencias = () => {
       <h1 className="text-center">Añadir Asistencia</h1>
 
       <Form className="formAsist">
-        <p>Seleccionar Alumno y Fecha del registro</p>
+        <p>Seleccionar Alumno y Fecha</p>
         <Form.Group controlId="selectAlumno" className="mb-3 d-flex align-items-center">
           <Form.Control
             as="select"
