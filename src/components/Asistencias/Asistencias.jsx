@@ -34,7 +34,7 @@ const Asistencias = () => {
   // Registrar asistencia
   const handleRegistro = async () => {
     if (selectAlumno === "-1" || !fecha) {
-      setMensaje("Por favor, seleccione un alumno y una fecha válida.");
+      setMensaje("Seleccione alumno y fecha válida.");
       return;
     }
 
@@ -67,10 +67,10 @@ const Asistencias = () => {
 
   return (
     <section className="d-flex flex-column align-items-center asistencias">
-      <h1 className="text-center">Añadir Asistencia</h1>
+      <h1 className="text-center">Añadir Registros</h1>
 
       <Form className="formAsist">
-        <p>Seleccionar Alumno y Fecha</p>
+        <p className="text-center">Seleccionar Alumno y Fecha</p>
         <Form.Group controlId="selectAlumno" className="mb-3 d-flex align-items-center">
           <Form.Control
             as="select"
@@ -101,7 +101,7 @@ const Asistencias = () => {
             </Spinner>
           )}
         </Form.Group>
-        <div className="d-flex justify-content-center calendar-container">
+        <div className="d-flex justify-content-center calendar-container w-100">
           <Form.Group controlId="fecha">
             <Calendario setFecha={setFecha} fechaSeleccionada={fecha} />
           </Form.Group>
