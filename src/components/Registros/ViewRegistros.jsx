@@ -101,7 +101,7 @@ const ViewRegistros = () => {
                     <strong>Grado:</strong> {alumno.grado}
                   </p>
                   <p>
-                    <strong>Teléfono:</strong> {alumno.telefono}
+                    <strong>Foto:</strong> {alumno.telefono}
                   </p>
                 </div>
                 <hr />

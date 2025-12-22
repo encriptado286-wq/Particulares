@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./StyleAlumns.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -7,12 +7,14 @@ const AddAlumnos = () => {
   const [nombre, setNombre] = useState("");
   const [grado, setGrado] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [foto, setFoto] = useState(null); // Guardar la imagen
+  const [foto, setFoto] = useState(null);
   const [alumnos, setAlumnos] = useState([]);
   const [mensaje, setMensaje] = useState("");
   const [mostrarTabla, setMostrarTabla] = useState(false);
 
-  // Cargar alumnos desde la API
+  const fileInputRef = useRef(null); // referencia al input oculto
+
+  // Cargar alumnos
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
@@ -25,42 +27,35 @@ const AddAlumnos = () => {
       }
     };
     cargarAlumnos();
-  }, [API_URL]);
+  }, []);
 
-  // Manejar subida de archivo
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFoto(file);
-    }
-  };
-
-  // Manejo de drag & drop
+  // Manejo drag & drop
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    if (file) {
-      setFoto(file);
-    }
+    if (file) setFoto(file);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
+  const handleDragOver = (e) => e.preventDefault();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setFoto(file);
   };
 
-  //guardar alumno  
+  // agregar alumno
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!nombre || !grado || !telefono) {
-      setMensaje("Por favor, completa todos los campos.");
+    if (!nombre || !grado) {
+      setMensaje("Por favor, completa los campos con *.");
       return;
     }
 
     try {
       const res = await fetch(`${API_URL}/alumnos`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, grado, telefono, foto: foto?.name || "" }),
+        headers: { "Content-Type": "application/json" }, // enviamos JSON
+        body: JSON.stringify({ nombre, grado, telefono }), // no enviamos foto
       });
 
       if (!res.ok) throw new Error("Error al guardar el alumno");
@@ -70,11 +65,8 @@ const AddAlumnos = () => {
       setNombre("");
       setGrado("");
       setTelefono("");
-      setFoto(null);
       setMensaje("¡Alumno agregado exitosamente!");
-      setTimeout(() => {
-        setMensaje("");
-      }, 5000);
+      setTimeout(() => setMensaje(""), 5000);
     } catch (error) {
       alert(error.message);
     }
@@ -92,18 +84,20 @@ const AddAlumnos = () => {
                 className="form-control"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ingresar Nombre y Apellido"
+                placeholder="Ingresar Nombre y Apellido*"
               />
             </div>
+
             <div className="mb-3">
               <input
                 type="text"
                 className="form-control"
                 value={grado}
                 onChange={(e) => setGrado(e.target.value)}
-                placeholder="Ingresar Grado"
+                placeholder="Ingresar Grado*"
               />
             </div>
+
             <div className="mb-3">
               <input
                 type="text"
@@ -114,28 +108,32 @@ const AddAlumnos = () => {
               />
             </div>
 
-            {/* Zona de drag & drop para la imagen */}
+          
             <div
               className="drop-zone mb-3"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
+              onClick={() => fileInputRef.current.click()} // disparar input oculto
             >
               {foto ? (
                 <img
                   src={URL.createObjectURL(foto)}
                   alt="Vista previa"
-                  className="preview-img"
+                  style={{ maxHeight: "150px", objectFit: "cover" }}
                 />
               ) : (
                 <p>Arrastra una foto aquí o haz clic para seleccionar un archivo.</p>
               )}
+
               <input
                 type="file"
                 accept="image/*"
+                ref={fileInputRef}
                 onChange={handleFileChange}
-                className="file-input"
+                style={{ display: "none" }}
               />
             </div>
+
             {mensaje && <div className="alert alert-success mt-2">{mensaje}</div>}
 
             <div className="button-container">
@@ -152,36 +150,47 @@ const AddAlumnos = () => {
             </div>
           </form>
         ) : (
-          <div>
-            <div className="tabla-alumnos">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Grado</th>
-                    <th>Teléfono</th>
+          <div className="tabla-alumnos">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Grado</th>
+                  <th>Teléfono</th>
+                  <th>Foto</th>
+                </tr>
+              </thead>
+              <tbody>
+                {alumnos.map((alumno) => (
+                  <tr key={alumno.id}>
+                    <td>{alumno.nombre}</td>
+                    <td>{alumno.grado}</td>
+                    <td>{alumno.telefono}</td>
+                    <td>
+                      {alumno.foto && (
+                        <img
+                          src={`${API_URL}${alumno.foto}`}
+                          alt="foto"
+                          width="60"
+                        />
+                      )}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {alumnos.map((alumno) => (
-                    <tr key={alumno.id}>
-                      <td>{alumno.nombre}</td>
-                      <td>{alumno.grado}</td>
-                      <td>{alumno.telefono}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="text-end">
-              <p className="pAlumnos text-start">Total de Alumnos: {alumnos.length}</p>
-                <button
-                  type="button"
-                  className="btn btnAdd"
-                  onClick={() => setMostrarTabla(false)}
-                >
-                  Volver al Formulario
-                </button>
-              </div>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="text-end">
+              <p className="pAlumnos text-start">
+                Total de Alumnos: {alumnos.length}
+              </p>
+              <button
+                type="button"
+                className="btn btnAdd"
+                onClick={() => setMostrarTabla(false)}
+              >
+                Volver al Formulario
+              </button>
             </div>
           </div>
         )}

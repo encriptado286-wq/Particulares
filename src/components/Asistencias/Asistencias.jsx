@@ -67,7 +67,7 @@ const Asistencias = () => {
 
   return (
     <section className="d-flex flex-column align-items-center asistencias">
-      <h1 className="text-center">Añadir Registros</h1>
+      <h1 className="text-center">Añadir Registros DORREGO</h1>
 
       <Form className="formAsist">
         <p className="text-center">Seleccionar Alumno y Fecha</p>
